@@ -19,7 +19,7 @@ public class ShipSpawner : MonoBehaviour
         while (true)
         {
             bool spawnShip1 = Random.value > 0.5f;
-            Vector3 spawnPosition = new Vector3(spawnShip1 ? 100 : -100, Random.Range(-5.0f, 5.0f), 0);
+            Vector3 spawnPosition = new Vector3(spawnShip1 ? 100 : -100, Random.Range(-10.0f, 10.0f), 0);
             Instantiate(spawnShip1 ? ship1 : ship2, spawnPosition, Quaternion.identity);
             yield return new WaitForSeconds(2);   
         }
