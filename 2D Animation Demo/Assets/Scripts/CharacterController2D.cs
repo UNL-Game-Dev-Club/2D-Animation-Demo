@@ -18,6 +18,8 @@ public class CharacterController2D : MonoBehaviour
 	float jumpHeight = 4;
 
 	private Animator animator;
+	
+	private SpriteRenderer sRender;
 
 	private BoxCollider2D boxCollider;
 
@@ -29,6 +31,7 @@ public class CharacterController2D : MonoBehaviour
 	{      
 		boxCollider = GetComponent<BoxCollider2D>();
 		animator = gameObject.GetComponent<Animator>();
+		sRender = gameObject.GetComponent<SpriteRenderer>();
 	}
 
 	private void Update()
@@ -55,11 +58,13 @@ public class CharacterController2D : MonoBehaviour
 			else
 			{
 				animator.SetTrigger("LeftKeyPress");
+				sRender.flipX = true;
 			}
 		}
 		else
 		{
 			velocity.x = Mathf.MoveTowards(velocity.x, 0, groundDeacceleration * Time.deltaTime);
+			sRender.flipX = false;
 			animator.SetTrigger("NoKeyPress");
 		}
 
