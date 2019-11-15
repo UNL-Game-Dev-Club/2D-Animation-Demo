@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class CharacterController2D : MonoBehaviour
@@ -49,7 +51,10 @@ public class CharacterController2D : MonoBehaviour
 
 		Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
 
-		grounded = false;
+        if (transform.position.y < -6)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        grounded = false;
 		foreach (Collider2D hit in hits)
 		{
 			if (hit == boxCollider) 
