@@ -17,6 +17,8 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField]
 	float jumpHeight = 4;
 
+	private Animator animator;
+
 	private BoxCollider2D boxCollider;
 
 	private Vector2 velocity;
@@ -26,6 +28,7 @@ public class CharacterController2D : MonoBehaviour
 	private void Awake()
 	{      
 		boxCollider = GetComponent<BoxCollider2D>();
+		animator = gameObject.GetComponent<Animator>();
 	}
 
 	private void Update()
@@ -43,9 +46,23 @@ public class CharacterController2D : MonoBehaviour
 		float moveInput = Input.GetAxisRaw("Horizontal");
 
 		if (moveInput != 0)
+		{
 			velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, walkAcceleration * Time.deltaTime);
+			if(moveInput > 0)
+			{
+				animator.SetTrigger("RightKeyPress");
+			} 
+			else
+			{
+				animator.SetTrigger("LeftKeyPress");
+			}
+		}
 		else
+		{
 			velocity.x = Mathf.MoveTowards(velocity.x, 0, groundDeacceleration * Time.deltaTime);
+			animator.SetTrigger("NoKeyPress");
+		}
+
 
 		transform.Translate(velocity * Time.deltaTime);
 
