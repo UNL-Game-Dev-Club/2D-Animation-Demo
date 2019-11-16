@@ -40,9 +40,12 @@ public class CharacterController2D : MonoBehaviour
 		{
 			velocity.y = 0;
 
-			if (Input.GetButtonDown("Jump")) 
-				velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
-		}
+			if (Input.GetButtonDown("Jump"))
+            {
+                animator.SetTrigger("SpaceKeyPress");
+                velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
+            }
+        }
 
 		velocity.y += Physics2D.gravity.y * Time.deltaTime;
 
